@@ -8,7 +8,7 @@ import javax.ws.rs.ext.Provider;
 import com.ibm.mqclient.exceptions.AppException;
 import com.ibm.mqclient.model.ErrorResponse;
 
-@Provider
+//@Provider
 public class ApplicationExceptionHandler implements ExceptionMapper<Throwable>  {
 		
     public Response toResponse(AppException e) 
