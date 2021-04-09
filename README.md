@@ -154,7 +154,29 @@ Support for running the [SonarQube CLI](https://docs.sonarqube.org/latest/analys
         </plugin>
         </plugins>
     ```
+### OpenShift extension
 
+See: https://quarkus.io/guides/deploying-to-openshift
+
+The command does a build and creates an image stream in the project/namespace you are in
+```
+./mvnw clean package -Dquarkus.container-image.build=true
+```
+
+To deploy the image run following commands:
+```
+oc get is
+oc new-app --name=greeting <project>/openshift-quickstart:1.0.0-SNAPSHOT
+oc get svc
+oc expose svc/greeting
+oc get routes
+curl http://<route>/greeting
+```
+
+To do a build and deploy to openshift:
+```
+./mvnw clean package -Dquarkus.kubernetes.deploy=true
+```
 
 
 ## Next Steps
