@@ -179,6 +179,15 @@ To do a build and deploy to openshift:
 ```
 
 
+## deploy using the openshift extension
+
+```
+./mvnw clean package -Dquarkus.kubernetes.deploy=true
+```
+
+See: https://quarkus.io/guides/deploying-to-openshift
+
+
 ## Next Steps
 * Learn more about [Quarkus](https://quarkus.io/).
 * Explore other [sample applications](https://cloud.ibm.com/developer/appservice/starter-kits) on IBM Cloud.
