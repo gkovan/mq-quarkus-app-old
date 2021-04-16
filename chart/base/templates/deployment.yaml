@@ -61,6 +61,51 @@ spec:
               value: ""
             - name: LOG_LEVEL
               value: {{ .Values.logLevel | quote }}
+            - name: QM
+              valueFrom:
+                configMapKeyRef:
+                  key: QM
+                  name: {{ include "mq-quarkus-app.fullname" . }}
+            - name: CHANNEL
+              valueFrom:
+                configMapKeyRef:
+                  key: CHANNEL
+                  name: {{ include "mq-quarkus-app.fullname" . }}
+            - name: CONNECTION_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: CONNECTION_NAME
+                  name: {{ include "mq-quarkus-app.fullname" . }}
+            - name: USER
+              valueFrom:
+                secretKeyRef:
+                  key: USER
+                  name: {{ include "mq-quarkus-app.fullname" . }}
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: PASSWORD
+                  name: {{ include "mq-quarkus-app.fullname" . }}
+            - name: QUEUE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: QUEUE_NAME
+                  name: {{ include "mq-quarkus-app.fullname" . }}
+            - name: APP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: APP_NAME
+                  name: {{ include "mq-quarkus-app.fullname" . }}  
+            - name: HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: HOST
+                  name: {{ include "mq-quarkus-app.fullname" . }}
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: PORT
+                  name: {{ include "mq-quarkus-app.fullname" . }}                                        
           envFrom:
             - configMapRef:
                 name: {{ default "jaeger-config" .Values.jaegerConfigName }}

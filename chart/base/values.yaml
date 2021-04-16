@@ -3,6 +3,8 @@
 # Declare variables to be passed into your templates.
 global: {}
 
+name: mq-quarkus-app
+
 replicaCount: 1
 logLevel: "debug"
 
@@ -20,10 +22,10 @@ service:
   port: 80
 
 route:
-  enabled: false
+  enabled: true
 
 ingress:
-  enabled: true
+  enabled: false
   appid:
     enabled: false
     # web or app - https://cloud.ibm.com/docs/services/appid?topic=appid-kube-auth
@@ -47,4 +49,17 @@ partOf: ""
 
 connectsTo: ""
 
-runtime: spring
+runtime: quarkus
+
+configmap:
+  CHANNEL: DEV.APP.SVRCONN
+  CONNECTION_NAME: qm-dev-ibm-mq.dev.svc.cluster.local(1414)
+  QM: QUICKSTART
+  QUEUE_NAME: DEV.QUEUE.1
+  APP_NAME: MQ-QUARKUS-APP
+  HOST: qm-dev-ibm-mq.dev.svc.cluster.local
+  PORT: 1414
+
+secret:
+  PASSWORD: cGFzc3cwcmQ=
+  USER: YXBw
