@@ -74,12 +74,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base-url}}/actuator/health",
+					"raw": "{{base-url}}/metrics/health",
 					"host": [
 						"{{base-url}}"
 					],
 					"path": [
-						"actuator",
+						"metrics",
 						"health"
 					]
 				}
