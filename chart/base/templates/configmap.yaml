@@ -9,5 +9,5 @@ data:
   QUEUE_NAME: {{ .Values.configmap.QUEUE_NAME }}
   APP_NAME: {{ .Values.configmap.APP_NAME }}
   HOST: {{ .Values.configmap.HOST }}
-  PORT: {{ .Values.configmap.PORT }}
+  PORT: {{ .Values.configmap.PORT | squote }}
   

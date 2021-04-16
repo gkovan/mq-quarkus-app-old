@@ -58,7 +58,7 @@ configmap:
   QUEUE_NAME: DEV.QUEUE.1
   APP_NAME: MQ-QUARKUS-APP
   HOST: qm-dev-ibm-mq.dev.svc.cluster.local
-  PORT: x1414
+  PORT: 1414
 
 secret:
   PASSWORD: cGFzc3cwcmQ=
