@@ -4,11 +4,13 @@
 
 ###  stage 1 ###
 FROM adoptopenjdk/maven-openjdk11 as BUILD
-  
-COPY src /usr/src/app/src
-COPY ./pom.xml /usr/src/app
+
 WORKDIR /usr/src/app
-RUN mvn package
+COPY ./pom.xml .
+RUN mvn -ntp install dependency:go-offline -DskipTests
+
+COPY src ./src
+RUN mvn -ntp package
 
 ### stage 2  ###
  
