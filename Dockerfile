@@ -1,9 +1,16 @@
+# multistage Dockerfile
+# first stage does the maven build
+# second stage creates the runtime image that includes the quarkus fast jar
+
+###  stage 1 ###
 FROM adoptopenjdk/maven-openjdk11 as BUILD
   
 COPY src /usr/src/app/src
 COPY ./pom.xml /usr/src/app
 WORKDIR /usr/src/app
 RUN mvn package
+
+### stage 2  ###
  
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.1
  
