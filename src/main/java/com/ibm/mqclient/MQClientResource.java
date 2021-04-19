@@ -14,7 +14,7 @@ import com.ibm.mqclient.model.ResponseData;
 import com.ibm.mqclient.service.MQService;
 
 @Path("/api")
-public class MQClientApp {
+public class MQClientResource {
 	
 	@Inject
 	private MQService mqService;
