@@ -71,11 +71,6 @@ spec:
                 configMapKeyRef:
                   key: CHANNEL
                   name: {{ include "mq-quarkus-app.fullname" . }}
-            - name: CONNECTION_NAME
-              valueFrom:
-                configMapKeyRef:
-                  key: CONNECTION_NAME
-                  name: {{ include "mq-quarkus-app.fullname" . }}
             - name: USER
               valueFrom:
                 secretKeyRef:
