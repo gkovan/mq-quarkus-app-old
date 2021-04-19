@@ -2,18 +2,14 @@ package com.ibm.mqclient;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.jupiter.api.Test;
-
-import com.ibm.mqclient.service.MQService;
-
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
 import io.restassured.http.ContentType;
+
+import com.ibm.mqclient.service.MQService;
 
 @QuarkusTest
 public class MQClientResourceTest {
@@ -53,8 +49,7 @@ public class MQClientResourceTest {
     public void sendJsonStringShouldReturn200() throws Exception {
 
     	String jsonRequestBody = "{\"firstName\":\"gerry\",\"lastName\":\"kovan\"}";
-    	Map<String,Object> anyMap = new HashMap<String,Object>();
-    	when(mqServiceMock.sendJson(anyMap)).thenReturn(jsonRequestBody);
+    	when(mqServiceMock.sendJson(any())).thenReturn(jsonRequestBody);
     	    	
         given()
         .header("Content-Type", "application/json")
@@ -64,6 +59,7 @@ public class MQClientResourceTest {
         .then()
            .statusCode(200)
            .contentType(ContentType.JSON)
-           .body("status", is("OK"));
+           .body("status", is("OK"))
+           .body("data", is(jsonRequestBody));        
     }
 }
