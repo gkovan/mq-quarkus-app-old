@@ -15,9 +15,9 @@
 </p>
 
 
-# Quarkus microservice
+# MQ Client Java Quarkus microservice
 
-In this sample application, you will create a basic Java web application using [Quarkus](https://quarkus.io/). This provides a starting point for creating Java microservice applications running as a native application on GraalVM. It contains application code with a simple `/hello` endpoint, a swagger UI and a health check at `/health`.
+Sample MQ Client Java Spring Boot application.
 
 ## Steps
 
@@ -52,6 +52,26 @@ To get started building this application locally you need to install
 Use the following command to build and run an application:
 
 `./mvnw quarkus:dev`
+
+## Run MQ docker image locally
+
+Pull the latest MQ docker image from docker hub:
+
+```
+docker pull ibmcom/mq:latest
+```
+
+Start the MQ docker image:
+
+```
+docker run --env LICENSE=accept --env MQ_QMGR_NAME=QM1 --volume qm1data:/mnt/mqm --publish 1414:1414 --publish 9443:9443 --detach --env MQ_APP_PASSWORD=passw0rd ibmcom/mq:latest
+```
+
+MQ Console:
+
+```
+https://localhost:9443/ibmmq/console
+```
 
 ## More Details
 
@@ -154,38 +174,21 @@ Support for running the [SonarQube CLI](https://docs.sonarqube.org/latest/analys
         </plugin>
         </plugins>
     ```
-### OpenShift extension
-
-See: https://quarkus.io/guides/deploying-to-openshift
-
-The command does a build and creates an image stream in the project/namespace you are in
-```
-./mvnw clean package -Dquarkus.container-image.build=true
-```
-
-To deploy the image run following commands:
-```
-oc get is
-oc new-app --name=greeting <project>/openshift-quickstart:1.0.0-SNAPSHOT
-oc get svc
-oc expose svc/greeting
-oc get routes
-curl http://<route>/greeting
-```
-
-To do a build and deploy to openshift:
-```
-./mvnw clean package -Dquarkus.kubernetes.deploy=true
-```
 
 
-## deploy using the openshift extension
+
+## Deploy using the Openshift extension
+This is an alternative developer friendly way to deploy the app to OpenShift.
+It will deploy the app to the namespace/project that is currently in context.
+Must be logged into an OpenShift cluster for this to work.
+Assumes that any ConfigMaps, Secrets that the deployment needs already exist.
 
 ```
 ./mvnw clean package -Dquarkus.kubernetes.deploy=true
 ```
+* See: https://quarkus.io/guides/deploying-to-openshift
+* Openshift/Kubernetes resource files get generated in the /target/kubernetes folder.
 
-See: https://quarkus.io/guides/deploying-to-openshift
 
 
 ## Next Steps
